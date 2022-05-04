@@ -1,4 +1,4 @@
-package com.matthiasbruns.kotlintutorial.dog.networking
+package com.example.data.mapper
 
 import com.example.domain.model.Characters
 

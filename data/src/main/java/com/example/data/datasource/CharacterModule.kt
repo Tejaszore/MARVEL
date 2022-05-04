@@ -1,6 +1,6 @@
-package com.example.data.entity
+package com.example.data.datasource
 
-import com.example.data.repositoryimpl.CharacterRepository
+import com.example.data.entity.CharacterRestRepository
 import com.matthiasbruns.kotlintutorial.dog.networking.CharacterListApi
 import dagger.Module
 import dagger.Provides

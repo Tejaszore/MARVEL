@@ -1,10 +1,14 @@
 package com.matthiasbruns.kotlintutorial.dog.networking
 
-import retrofit2.Call
+import com.example.data.mapper.CharactersListResponse
+import io.reactivex.Single
 import retrofit2.http.GET
 
 interface CharacterListApi {
 
+//    @GET("/v1/public/characters")
+//    fun getCharacters(): Call<MutableList<CharactersListResponse>>
+
     @GET("/v1/public/characters")
-    fun getCharacters(): Call<MutableList<CharactersListResponse>>
+    fun getCharacters(): Single<CharactersListResponse>
 }
