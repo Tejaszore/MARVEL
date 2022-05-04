@@ -1,4 +1,4 @@
-//package com.example.marvel.data.injection
+//package com.example.marvel.injection
 //
 //import android.app.Application
 //import dagger.android.AndroidInjector
@@ -16,7 +16,7 @@
 //    }
 //}
 
-//package com.example.marvel.data.injection
+//package com.example.marvel.injection
 //
 //import android.app.Application
 //import com.example.marvel.BaseApplication

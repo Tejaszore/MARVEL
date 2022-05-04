@@ -1,4 +1,4 @@
-package com.example.marvel.data.injection
+package com.example.marvel.di
 
 import javax.inject.Qualifier
 

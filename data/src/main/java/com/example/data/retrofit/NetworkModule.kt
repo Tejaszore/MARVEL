@@ -1,4 +1,4 @@
-package com.example.marvel.data.injection
+package com.example.data.retrofit
 
 import dagger.Module
 import dagger.Provides

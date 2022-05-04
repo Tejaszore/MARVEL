@@ -1,0 +1,65 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion 32
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 32
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    implementation project(path: ':domain')
+    implementation project(path: ':app')
+    // Networking
+    def retrofitVersion = '2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+    // Dagger
+//    implementation 'com.google.dagger:dagger:2.38.1'
+//    implementation 'com.google.dagger:dagger-android-support:2.11' // if you use the support libraries
+//    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+//    kapt 'com.google.dagger:dagger-compiler:2.11'
+//    kapt 'com.google.dagger:dagger-android-processor:2.15'R
+
+    // Dagger
+//    implementation 'com.google.dagger:dagger:2.38.1'
+//
+//    implementation 'com.google.dagger:dagger-android-support:2.24'
+//    annotationProcessor 'com.google.dagger:dagger-android-processor:2.24'
+//    kapt 'com.google.dagger:dagger-compiler:2.24'
+
+//    // Dagger
+//    implementation 'com.google.dagger:dagger:2.38.1'
+//    annotationProcessor 'com.google.dagger:dagger-compiler:2.24'
+//
+//    implementation 'com.google.dagger:dagger-android:2.35.1'
+//    implementation 'com.google.dagger:dagger-android-support:2.24'
+//    annotationProcessor 'com.google.dagger:dagger-android-processor:2.24'
+
+    // Dagger
+    implementation 'com.google.dagger:dagger-android:2.35.1'
+    implementation 'com.google.dagger:dagger-android-support:2.24' // if you use the support libraries
+    kapt 'com.google.dagger:dagger-android-processor:2.24'
+    kapt 'com.google.dagger:dagger-compiler:2.24'
+}

@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/layout/activity_marvelcharacter_list.xml" value="0.17119565217391305" />
         <entry key="app/src/main/res/layout/fragment_charaterslist.xml" value="0.2006340579710145" />
         <entry key="app/src/main/res/layout/item_character.xml" value="0.2006340579710145" />
+        <entry key="domain/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
       </map>
     </option>
   </component>

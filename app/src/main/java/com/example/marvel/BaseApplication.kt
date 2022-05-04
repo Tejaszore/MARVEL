@@ -1,10 +1,9 @@
 package com.example.marvel
 
 import android.app.Application
-import com.example.marvel.data.injection.AppModule
-import com.example.marvel.data.injection.ApplicationComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import com.example.marvel.di.AppModule
+import com.example.marvel.di.ApplicationComponent
+import com.example.marvel.di.DaggerApplicationComponent
 
 class BaseApplication : Application() {
 
@@ -31,11 +30,8 @@ companion object {
 
     override fun onCreate() {
         super.onCreate()
-//        component.inject(this)
-//        appComponent = component
+        component.inject(this)
+        appComponent = component
     }
 
-//    override fun applicationInjector(): AndroidInjector<out DaggerApplication>? {
-//        return DaggerApplicationCompnent
-//    }
 }
