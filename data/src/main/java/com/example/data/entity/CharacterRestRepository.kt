@@ -1,4 +1,4 @@
-package com.example.domain.repository
+package com.example.data.entity
 
 import com.example.data.repositoryimpl.CharacterRepository
 import com.example.domain.model.Characters
