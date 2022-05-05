@@ -3,6 +3,7 @@ package com.example.marvel.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.domain.model.Characters
 
 class CharacterListViewModel: ViewModel() {
 

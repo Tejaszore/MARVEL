@@ -1,4 +1,4 @@
-package com.matthiasbruns.kotlintutorial.dog.networking
+package com.example.data.entity
 
 import com.example.data.mapper.CharactersListResponse
 import io.reactivex.Single

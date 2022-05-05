@@ -1,40 +1,54 @@
-//package com.example.marvel.injection
+package com.example.marvel.di
+
+import com.example.marvel.BaseApplication
+import dagger.BindsInstance
+import dagger.Component
+import dagger.android.AndroidInjector
+
+@Component
+interface AppComponent : AndroidInjector<BaseApplication> {
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        fun application(application: AppModule): Builder
+        fun build(): AppComponent
+    }
+}
+
+//@Singleton
+//@Component(modules = [AndroidInjectionModule::class, AppModule::class])
+//interface AppComponent : AndroidInjector<BaseApplication> {
 //
-//import android.app.Application
-//import dagger.android.AndroidInjector
-//import com.example.marvel.MainActivity
-//import dagger.BindsInstance
-//import dagger.Component
-//
-//@Component
-//interface AppComponent : AndroidInjector<MainActivity?> {
 //    @Component.Builder
 //    interface Builder {
 //        @BindsInstance
-//        fun application(application: Application?): Builder?
-//        fun build(): AppComponent?
+//        fun application(application: Application): Builder
+//        fun build(): AppComponent
 //    }
+//    override fun inject(app: BaseApplication)
 //}
 
-//package com.example.marvel.injection
-//
-//import android.app.Application
-//import com.example.marvel.BaseApplication
-//import dagger.BindsInstance
-//import dagger.Component
-//import dagger.android.AndroidInjector
-//import dagger.android.support.AndroidSupportInjectionModule
-//
+//@ForApplication
+//@Singleton
 //@Component(
-//    modules = {
-//        AndroidSupportInjectionModule.class,
-//    }
+//    modules = [AppModule::class]
 //)
-//interface ApplicationComponent : AndroidInjector<BaseApplication?> {
-//    @Component.Builder
-//    interface Builder {
-//        @BindsInstance
-//        fun application(application: Application?): Builder?
-//        fun build(): ApplicationComponent?
-//    }
+//interface AppComponent {
+//    fun inject(application: BaseApplication)
+//}
+
+////@ForApplication
+//@Component(modules = [AppModule::class])
+//interface ApplicationComponent {
+//
+//    fun inject(application: BaseApplication)
+//}
+
+
+//@Singleton
+//@Component(modules={AppModule.class, NetModule.class})
+//public interface AppComponent {
+//    void inject(MainActivity activity);
+//    // void inject(MyFragment fragment);
+//    // void inject(MyService service);
 //}

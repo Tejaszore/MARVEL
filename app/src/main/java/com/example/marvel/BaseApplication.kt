@@ -2,29 +2,29 @@ package com.example.marvel
 
 import android.app.Application
 import com.example.marvel.di.AppModule
-import com.example.marvel.di.ApplicationComponent
-import com.example.marvel.di.DaggerApplicationComponent
+import com.example.marvel.di.AppComponent
+import com.example.marvel.di.DaggerAppComponent
 
 class BaseApplication : Application() {
 
-companion object {
-    @JvmStatic
-    private lateinit var appComponent: ApplicationComponent
-    fun component(): ApplicationComponent {
-        return appComponent
+    companion object {
+        @JvmStatic
+        private lateinit var appComponent: AppComponent
+        fun component(): AppComponent {
+            return appComponent
+        }
+
+        @JvmStatic
+        private lateinit var appModule: AppModule
+        fun module(): AppModule {
+            return appModule
+        }
     }
 
-    @JvmStatic
-    private lateinit var appModule: AppModule
-    fun module(): AppModule {
-        return appModule
-    }
-}
-    private val component: ApplicationComponent by lazy {
+    private val component: AppComponent by lazy {
         appModule = AppModule(this)
-
-        DaggerApplicationComponent.builder()
-            .appModule(appModule)
+        DaggerAppComponent.builder()
+            .application(appModule)
             .build()
     }
 
@@ -33,5 +33,4 @@ companion object {
         component.inject(this)
         appComponent = component
     }
-
 }
