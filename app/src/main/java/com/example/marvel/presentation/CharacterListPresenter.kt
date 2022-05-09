@@ -17,12 +17,10 @@ class CharacterListPresenter : TiPresenter<CharactersListView>() {
         @JvmStatic val TAG = CharacterListPresenter::class.java.simpleName!!
     }
 
-    @Inject lateinit var presenterConfig: PresenterConfig
+//    @Inject lateinit var presenterConfig: PresenterConfig
     @Inject lateinit var repository: CharacterRepository
 
-
     private val rxHandler = RxTiPresenterDisposableHandler(this)
-
 
     private val characterCache: MutableList<Characters> = mutableListOf()
 
@@ -50,7 +48,7 @@ class CharacterListPresenter : TiPresenter<CharactersListView>() {
         // Reacts to the reload click and gets some new Characters - yay!
         rxHandler.manageViewDisposable(view.onReloadClick()
                 // clickDebounce will provide a buffer if the user plays monkey on the reload button
-                .debounce(presenterConfig.clickDebounce, TimeUnit.MILLISECONDS)
+//                .debounce(presenterConfig.clickDebounce, TimeUnit.MILLISECONDS)
                 // Cheap way to trigger a reload of the Charactergies
                 .subscribe({ loadCharacters(view) })
         )

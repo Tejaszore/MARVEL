@@ -29,14 +29,13 @@ import net.grandcentrix.thirtyinch.plugin.TiFragmentPlugin
 
 class CharacterListFragment: CompositeFragment(), LifecycleRegistryOwner, CharactersListView {
 
-    private val lifecycleRegistry = LifecycleRegistry(this)
-
     private lateinit var viewModel : CharacterListViewModel
 
     private var dialog: Dialog? = null
 
     private val adapter = CharactersAdapter()
 
+    private val lifecycleRegistry = LifecycleRegistry(this)
     override fun getLifecycle(): LifecycleRegistry {
         return lifecycleRegistry
     }
@@ -60,7 +59,7 @@ class CharacterListFragment: CompositeFragment(), LifecycleRegistryOwner, Charac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
 
         onReloadClickSubject = PublishSubject.create()
 
@@ -108,21 +107,21 @@ class CharacterListFragment: CompositeFragment(), LifecycleRegistryOwner, Charac
         super.onDestroy()
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater!!.inflate(R.menu.character_list, menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//        when (item!!.itemId) {
-//            R.id.action_reload -> {
-//                // Sends the click event through the onReloadClickSubject to the subscribing presenter
-//                onReloadClickSubject.onNext(Object())
-//                return true
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater!!.inflate(R.menu.character_list, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item!!.itemId) {
+            R.id.action_reload -> {
+                // Sends the click event through the onReloadClickSubject to the subscribing presenter
+                onReloadClickSubject.onNext(Object())
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun subscribeToViewModel() {
         viewModel.getCharacters().observe(this, Observer { characters ->

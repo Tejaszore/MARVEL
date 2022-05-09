@@ -4,7 +4,10 @@ import com.example.marvel.BaseApplication
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
+import javax.inject.Singleton
 
+@ForApplication
+@Singleton
 @Component
 interface AppComponent : AndroidInjector<BaseApplication> {
     @Component.Builder

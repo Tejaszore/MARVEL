@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.domain">
 
-    <dist:module
-        dist:instant="false"
-        dist:title="@string/domain">
-        <dist:delivery>
-            <dist:install-time />
-        </dist:delivery>
-        <dist:fusing dist:include="true" />
-    </dist:module>
+<!--    <user-permission android:name="android.permission.INTERNET" />-->
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+    </application>
+
+<!--    <dist:module-->
+<!--        dist:instant="false"-->
+<!--        dist:title="@string/domain">-->
+<!--        <dist:delivery>-->
+<!--            <dist:install-time />-->
+<!--        </dist:delivery>-->
+<!--        <dist:fusing dist:include="true" />-->
+<!--    </dist:module>-->
 </manifest>

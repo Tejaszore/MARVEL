@@ -100,4 +100,10 @@ dependencies {
     implementation "net.grandcentrix.thirtyinch:thirtyinch:$thirtyinchVersion"
     implementation "net.grandcentrix.thirtyinch:thirtyinch-rx2:$thirtyinchVersion"
     implementation "net.grandcentrix.thirtyinch:thirtyinch-plugin:$thirtyinchVersion"
+
+    // Networking
+    def retrofitVersion = '2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 }
