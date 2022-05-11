@@ -1,5 +1,6 @@
 package com.example.data.retrofit
 
+import com.example.domain.BuildConfig
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -13,7 +14,8 @@ class NetworkModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://gateway.marvel.com:443/")
+//            .baseUrl("https://gateway.marvel.com/")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()

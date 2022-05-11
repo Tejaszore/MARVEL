@@ -13,6 +13,20 @@ android {
         targetSdk 32
     }
 
+    buildTypes {
+        debug {
+            buildConfigField("String", "PUBLIC_KEY", "\"bd690936cd89c676c26c1692f3076045\"" )
+            buildConfigField("String", "PRIVATE_KEY", "\"baea5fa7ddcd567abaf406afdd09d81a4429eba8\"")
+            buildConfigField("String", "BASE_URL", "\"http://gateway.marvel.com/v1/public/\"")
+        }
+
+        release {
+            buildConfigField("String", "PUBLIC_KEY", "\"bd690936cd89c676c26c1692f3076045\"" )
+            buildConfigField("String", "PRIVATE_KEY", "\"baea5fa7ddcd567abaf406afdd09d81a4429eba8\"")
+            buildConfigField("String", "BASE_URL", "\"http://gateway.marvel.com/v1/public/\"")
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

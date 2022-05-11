@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.data.datasource.CharacterRepository
 import com.example.domain.model.Characters
 import com.example.marvel.di.CharactersListView
+import com.initishbhatt.marvelsuperheros.api.model.AllCharactersModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import net.grandcentrix.thirtyinch.TiPresenter
@@ -22,7 +23,7 @@ class CharacterListPresenter : TiPresenter<CharactersListView>() {
 
     private val rxHandler = RxTiPresenterDisposableHandler(this)
 
-    private val characterCache: MutableList<Characters> = mutableListOf()
+    private val characterCache: MutableList<AllCharactersModel> = mutableListOf()
 
     /**
      * Called when the view was attached to this presenter (when it is available)
@@ -58,10 +59,10 @@ class CharacterListPresenter : TiPresenter<CharactersListView>() {
      * Creates the Character loading logic wrapped in a Single.
      * Will also tell the view to show the loading indicator
      */
-    private fun createCharacterLoader(): Single<List<Characters>> {
+    private fun createCharacterLoader(): Single<List<AllCharactersModel>> {
         return Single.fromCallable { view!!.getViewModel().setLoading(true) }
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .flatMap<List<Characters>> { _ -> repository.getCharacters() }
+                .flatMap<List<AllCharactersModel>> { _ -> repository.getCharacters() }
                 .map { characters ->
                     characterCache.clear()
                     characterCache.addAll(characters)
@@ -87,7 +88,7 @@ class CharacterListPresenter : TiPresenter<CharactersListView>() {
         )
     }
 
-    private fun renderCharacters(view: CharactersListView, character: List<Characters>) {
+    private fun renderCharacters(view: CharactersListView, character: List<AllCharactersModel>) {
         val viewModel = view.getViewModel()
         viewModel.setCharacters(character)
         viewModel.setLoading(false)
