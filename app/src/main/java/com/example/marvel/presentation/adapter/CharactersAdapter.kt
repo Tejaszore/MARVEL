@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.domain.model.Characters
 import com.example.marvel.R
 import com.initishbhatt.marvelsuperheros.api.model.AllCharactersModel
 import kotlinx.android.synthetic.main.item_character.view.*
@@ -36,6 +35,7 @@ class CharactersAdapter: RecyclerView.Adapter<CharactersViewHolder>() {
 class CharactersViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
     fun bind(characters: AllCharactersModel) {
         itemView.character_name_text_view.text = characters.name
+        itemView.character_details_text_view.text = characters.description
         Glide.with(itemView.context)
             .load("${characters.thumbnail.path}.${characters.thumbnail.extension}")
             .into(itemView.character_image_view)

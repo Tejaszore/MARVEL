@@ -20,12 +20,14 @@ import com.example.marvel.di.DaggerCharactersListComponent
 import com.example.marvel.presentation.CharacterListPresenter
 import com.example.marvel.presentation.adapter.CharactersAdapter
 import com.example.marvel.presentation.viewmodel.CharacterListViewModel
+import com.initishbhatt.marvelsuperheros.api.model.AllCharactersModel
 import com.pascalwelsch.compositeandroid.fragment.CompositeFragment
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_charaterslist.*
 import net.grandcentrix.thirtyinch.internal.TiPresenterProvider
 import net.grandcentrix.thirtyinch.plugin.TiFragmentPlugin
+
 
 class CharacterListFragment: CompositeFragment(), LifecycleRegistryOwner, CharactersListView {
 
@@ -59,17 +61,14 @@ class CharacterListFragment: CompositeFragment(), LifecycleRegistryOwner, Charac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        viewModel = ViewModelProviders.of(this).get(CharacterListViewModel::class.java)
         setHasOptionsMenu(true)
+        subscribeToViewModel()
 
         onReloadClickSubject = PublishSubject.create()
 
         component.inject(this)
-
         component.inject(presenter)
-
-        viewModel = ViewModelProviders.of(this).get(CharacterListViewModel::class.java)
-
-        subscribeToViewModel()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -79,9 +78,6 @@ class CharacterListFragment: CompositeFragment(), LifecycleRegistryOwner, Charac
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // View injected by kotlin-android-extentions
-        character_recycler_view.adapter = adapter
 
         val layoutManager: RecyclerView.LayoutManager
         // set the layout manager and some props on the RecyclerView
@@ -97,9 +93,18 @@ class CharacterListFragment: CompositeFragment(), LifecycleRegistryOwner, Charac
         character_recycler_view.layoutManager = layoutManager
         character_recycler_view.setHasFixedSize(true)
 
-        // Improve scrolling with a SnapHelper
-        val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(character_recycler_view)
+        // View injected by kotlin-android-extentions
+        character_recycler_view.adapter = adapter
+
+////         Improve scrolling with a SnapHelper
+////        val snapHelper = LinearSnapHelper()
+////        snapHelper.attachToRecyclerView(character_recycler_view)
+//
+//        val recyclerView = findViewById(R.id.recyclerView) as RecyclerView
+//        val adapter = MyListAdapter(myListData)
+//        recyclerView.setHasFixedSize(true)
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+//        recyclerView.adapter = adapter
     }
 
     override fun onDestroy() {
@@ -151,5 +156,13 @@ class CharacterListFragment: CompositeFragment(), LifecycleRegistryOwner, Charac
 
     override fun onReloadClick(): Observable<Any> {
         return onReloadClickSubject
+    }
+
+    override fun updateView(character: List<AllCharactersModel>) {
+        viewModel.setCharacters(character)
+        viewModel.setLoading(false)
+
+        adapter.characters = character
+        character_recycler_view.visibility = View.VISIBLE
     }
 }

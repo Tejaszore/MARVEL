@@ -15,11 +15,13 @@ import javax.inject.Inject
 class CharacterListPresenter : TiPresenter<CharactersListView>() {
 
     companion object {
-        @JvmStatic val TAG = CharacterListPresenter::class.java.simpleName!!
+        @JvmStatic
+        val TAG = CharacterListPresenter::class.java.simpleName!!
     }
 
-//    @Inject lateinit var presenterConfig: PresenterConfig
-    @Inject lateinit var repository: CharacterRepository
+    //    @Inject lateinit var presenterConfig: PresenterConfig
+    @Inject
+    lateinit var repository: CharacterRepository
 
     private val rxHandler = RxTiPresenterDisposableHandler(this)
 
@@ -47,7 +49,8 @@ class CharacterListPresenter : TiPresenter<CharactersListView>() {
      */
     private fun subscribeToView(view: CharactersListView) {
         // Reacts to the reload click and gets some new Characters - yay!
-        rxHandler.manageViewDisposable(view.onReloadClick()
+        rxHandler.manageViewDisposable(
+            view.onReloadClick()
                 // clickDebounce will provide a buffer if the user plays monkey on the reload button
 //                .debounce(presenterConfig.clickDebounce, TimeUnit.MILLISECONDS)
                 // Cheap way to trigger a reload of the Charactergies
@@ -61,13 +64,13 @@ class CharacterListPresenter : TiPresenter<CharactersListView>() {
      */
     private fun createCharacterLoader(): Single<List<AllCharactersModel>> {
         return Single.fromCallable { view!!.getViewModel().setLoading(true) }
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .flatMap<List<AllCharactersModel>> { _ -> repository.getCharacters() }
-                .map { characters ->
-                    characterCache.clear()
-                    characterCache.addAll(characters)
-                    return@map characters
-                }
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .flatMap<List<AllCharactersModel>> { _ -> repository.getCharacters() }
+            .map { characters ->
+                characterCache.clear()
+                characterCache.addAll(characters)
+                return@map characters
+            }
     }
 
     /**
@@ -76,21 +79,23 @@ class CharacterListPresenter : TiPresenter<CharactersListView>() {
      */
     private fun loadCharacters(view: CharactersListView) {
         rxHandler.manageDisposable(createCharacterLoader()
-                .observeOn(AndroidSchedulers.mainThread())
-                .toObservable()
-                .onErrorReturn { throwable ->
-                    Log.e(TAG, "Could not load cute little pictures.", throwable)
-                    return@onErrorReturn listOf()
-                }
-                .subscribe { characters ->
-                    renderCharacters(view, characters)
-                }
+            .observeOn(AndroidSchedulers.mainThread())
+            .toObservable()
+            .onErrorReturn { throwable ->
+                Log.e(TAG, "Could not load cute little pictures.", throwable)
+                return@onErrorReturn listOf()
+            }
+            .subscribe { characters ->
+                renderCharacters(view, characters)
+            }
         )
     }
 
-    private fun renderCharacters(view: CharactersListView, character: List<AllCharactersModel>) {
+    fun renderCharacters(view: CharactersListView, character: List<AllCharactersModel>) {
         val viewModel = view.getViewModel()
         viewModel.setCharacters(character)
         viewModel.setLoading(false)
+
+        view.updateView(character)
     }
 }
